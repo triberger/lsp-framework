@@ -164,7 +164,7 @@ RequestHandler& RequestHandler::add(F&& handlerFunc)
 		typename MessageType::Params params;
 		fromJson(std::move(json), params);
 
-		if constexpr(std::same_as<decltype(f(id, params)), ASyncRequestResult<MessageType>>)
+		if constexpr(std::same_as<decltype(f(id, std::forward<MessageType::Params>(params))), ASyncRequestResult<MessageType>>)
 		{
 			auto result = f(id, std::move(params));
 

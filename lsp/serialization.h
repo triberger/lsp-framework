@@ -391,7 +391,10 @@ template<typename T>
 void fromJson(json::Any&& json, Nullable<T>& nullable)
 {
 	if(nullable.isNull())
+	{
 		nullable = T{};
+		return;
+	}
 
 	fromJson(std::move(json), *nullable);
 }
